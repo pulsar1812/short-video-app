@@ -12,7 +12,7 @@ type VideoCardProps = {
 }
 
 export default function VideoCard({
-  post: { postedBy, video },
+  post: { postedBy, video, _id },
 }: VideoCardProps) {
   const [playing, setPlaying] = useState(false)
   const [isHover, setIsHover] = useState(false)
@@ -73,7 +73,7 @@ export default function VideoCard({
           }}
           className='rounded-3xl'
         >
-          <Link href='/'>
+          <Link href={`/detail/${_id}`}>
             <video
               src={video.asset.url}
               loop
