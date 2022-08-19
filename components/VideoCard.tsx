@@ -29,6 +29,12 @@ export default function VideoCard({
     }
   }
 
+  useEffect(() => {
+    if (videoRef?.current) {
+      videoRef.current.muted = isMuted
+    }
+  }, [isMuted])
+
   return (
     <div className='flex flex-col border-b-2 border-gray-200'>
       <div>
@@ -49,8 +55,8 @@ export default function VideoCard({
           </div>
           <div>
             <Link href='/'>
-              <div>
-                <p>
+              <div className='flex items-center gap-2'>
+                <p className='flex gap-2 items-center md:text-md font-bold text-primary'>
                   {postedBy.userName}
                   <GoVerified className='text-blue-400 text-md' />
                 </p>
@@ -78,12 +84,16 @@ export default function VideoCard({
               src={video.asset.url}
               loop
               ref={videoRef}
-              className='w-[200px] h-[300px] md:h-[400px] lg:w-[600px] lg:h-[530px] rounded-2xl cursor-pointer bg-gray-100'
+              className='w-[200px] h-[300px] md:h-[400px] lg:w-[600px] lg:h-[530px] 
+              rounded-2xl cursor-pointer bg-gray-100'
             ></video>
           </Link>
 
           {isHover && (
-            <div className='absolute bottom-6 left-10 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] p-3 cursor-pointer '>
+            <div
+              className='absolute bottom-6 left-10 md:left-14 lg:left-0 flex 
+            gap-10 lg:justify-between w-[100px] md:w-[50px] p-3 cursor-pointer '
+            >
               {playing ? (
                 <button onClick={onVideoPress}>
                   <BsFillPauseFill className='text-black text-2xl lg:text-4xl' />

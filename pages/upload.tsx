@@ -132,8 +132,8 @@ export default function Upload() {
                     <input
                       type='file'
                       name='upload-video'
-                      className='w-0 h-0'
                       onChange={uploadVideo}
+                      className='w-0 h-0'
                     />
                   </label>
                 )}
