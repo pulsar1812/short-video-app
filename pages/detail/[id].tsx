@@ -12,7 +12,7 @@ import { BASE_URL } from '../../utils'
 import { Video } from '../../types'
 import useAuthStore from '../../store/authStore'
 import LikeButton from '../../components/LikeButton'
-import Comment from '../../components/Comment'
+import Comments from '../../components/Comments'
 
 type DetailProps = {
   postDetails: Video
@@ -25,7 +25,7 @@ export default function Detail({ postDetails }: DetailProps) {
 
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  const { userProfile } = useAuthStore()
+  const { userProfile }: any = useAuthStore()
 
   const router = useRouter()
 
@@ -46,6 +46,18 @@ export default function Detail({ postDetails }: DetailProps) {
   }, [post, isMuted])
 
   if (!post) return null
+
+  const handleLike = async (like: boolean) => {
+    if (userProfile) {
+      const { data } = await axios.put(`${BASE_URL}/api/like`, {
+        userId: userProfile._id,
+        postId: post._id,
+        like,
+      })
+
+      setPost({ ...post, likes: data.likes })
+    }
+  }
 
   return (
     <div
@@ -132,9 +144,17 @@ export default function Detail({ postDetails }: DetailProps) {
 
           <p className='text-lg text-gray-600 px-10'>{post.caption}</p>
 
-          <div className='mt-10 px-10'>{userProfile && <LikeButton />}</div>
+          <div className='mt-10 px-10'>
+            {userProfile && (
+              <LikeButton
+                likes={post.likes}
+                handleLike={() => handleLike(true)}
+                handleDislike={() => handleLike(false)}
+              />
+            )}
+          </div>
 
-          <Comment />
+          <Comments />
         </div>
       </div>
     </div>
