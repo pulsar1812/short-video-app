@@ -20,8 +20,10 @@ type DetailProps = {
 
 export default function Detail({ postDetails }: DetailProps) {
   const [post, setPost] = useState(postDetails)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(false)
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [isMuted, setIsMuted] = useState<boolean>(false)
+  const [comment, setComment] = useState<string>('')
+  const [isPostingComment, setIsPostingComment] = useState<boolean>(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -56,6 +58,23 @@ export default function Detail({ postDetails }: DetailProps) {
       })
 
       setPost({ ...post, likes: data.likes })
+    }
+  }
+
+  const addComment = async (e) => {
+    e.preventDefault()
+
+    if (userProfile && comment) {
+      setIsPostingComment(true)
+
+      const { data } = await axios.put(`${BASE_URL}/api/post/${post._id}`, {
+        userId: userProfile._id,
+        comment,
+      })
+
+      setPost({ ...post, comments: data.comments })
+      setComment('')
+      setIsPostingComment(false)
     }
   }
 
@@ -154,7 +173,13 @@ export default function Detail({ postDetails }: DetailProps) {
             )}
           </div>
 
-          <Comments />
+          <Comments
+            comment={comment}
+            setComment={setComment}
+            addComment={addComment}
+            comments={post.comments}
+            isPostingComment={isPostingComment}
+          />
         </div>
       </div>
     </div>
