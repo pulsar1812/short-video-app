@@ -13,12 +13,15 @@ import Footer from './Footer'
 export default function Sidebar() {
   const [showSidebar, setShowSidebar] = useState(true)
 
+  const { pathname } = useRouter()
+
   const userProfile = false
 
-  const activeLink = ''
+  const activeLink =
+    'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#F51997] rounded'
 
   const normalLink =
-    'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#F51997] rounded'
+    'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded'
 
   return (
     <div>
@@ -35,7 +38,7 @@ export default function Sidebar() {
         >
           <div className='xl:border-b-2 border-gray-200 xl:pb-4'>
             <Link href='/'>
-              <div className={normalLink}>
+              <div className={pathname === '/' ? activeLink : normalLink}>
                 <p className='text-2xl'>
                   <AiFillHome />
                 </p>
