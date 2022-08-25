@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { GoogleLogin } from 'react-google-login'
@@ -9,13 +8,16 @@ import { ImCancelCircle } from 'react-icons/im'
 import Discover from './Discover'
 import SuggestedAccounts from './SuggestedAccounts'
 import Footer from './Footer'
+import useAuthStore from '../store/authStore'
+
+const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
 
 export default function Sidebar() {
   const [showSidebar, setShowSidebar] = useState(true)
 
   const { pathname } = useRouter()
 
-  const userProfile = false
+  const { userProfile } = useAuthStore()
 
   const activeLink =
     'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#F51997] rounded'
@@ -46,14 +48,16 @@ export default function Sidebar() {
               </div>
             </Link>
           </div>
-          {!userProfile && (
+
+          {/* Login Button */}
+          {/* {!userProfile && (
             <div className='px-2 py-4 hidden xl:block'>
               <p className='text-gray-400'>
                 Log in to like and comment on videos
               </p>
               <div className='pr-4'>
                 <GoogleLogin
-                  clientId=''
+                  clientId={`${clientId}`}
                   render={(renderProps) => (
                     <button
                       onClick={renderProps.onClick}
@@ -72,7 +76,7 @@ export default function Sidebar() {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           <Discover />
           <SuggestedAccounts />
