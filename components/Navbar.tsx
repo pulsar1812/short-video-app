@@ -13,10 +13,15 @@ import useAuthStore from '../store/authStore'
 import { IUser } from '../types'
 
 export default function Navbar() {
+  const [user, setUser] = useState<IUser | null>()
   const [searchValue, setSearchValue] = useState('')
   const { userProfile, addUser, removeUser } = useAuthStore()
 
   const router = useRouter()
+
+  useEffect(() => {
+    setUser(userProfile)
+  }, [userProfile])
 
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault()
@@ -65,7 +70,7 @@ export default function Navbar() {
       </div>
 
       <div>
-        {userProfile ? (
+        {user ? (
           <div className='flex gap-5 md:gap-10'>
             <Link href='/upload'>
               <button className='border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2'>
@@ -73,11 +78,11 @@ export default function Navbar() {
                 <span className='hidden md:block'>Upload</span>
               </button>
             </Link>
-            {userProfile.image && (
+            {user.image && (
               <Link href='/'>
                 <>
                   <Image
-                    src={userProfile.image}
+                    src={user.image}
                     width={40}
                     height={40}
                     alt='profile photo'
