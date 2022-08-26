@@ -25,7 +25,7 @@ export default function Detail({ postDetails }: DetailProps) {
   const [comment, setComment] = useState<string>('')
   const [isPostingComment, setIsPostingComment] = useState<boolean>(false)
 
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
 
   const { userProfile }: any = useAuthStore()
 

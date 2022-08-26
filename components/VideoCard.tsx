@@ -17,7 +17,7 @@ export default function VideoCard({
   const [playing, setPlaying] = useState(false)
   const [isHover, setIsHover] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
 
   const onVideoPress = () => {
     if (playing) {
@@ -30,9 +30,10 @@ export default function VideoCard({
   }
 
   useEffect(() => {
-    if (videoRef?.current) {
-      videoRef.current.muted = isMuted
+    if (!videoRef.current) {
+      return
     }
+    videoRef.current.muted = isMuted
   }, [isMuted])
 
   return (
