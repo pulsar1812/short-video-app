@@ -8,7 +8,7 @@ import NoResults from '../../components/NoResults'
 import { BASE_URL } from '../../utils'
 import { Video, IUser } from '../../types'
 
-type ProfileProps = {
+interface ProfileProps {
   data: {
     user: IUser
     userVideos: Video[]

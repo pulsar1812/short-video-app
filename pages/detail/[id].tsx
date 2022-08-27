@@ -14,7 +14,7 @@ import useAuthStore from '../../store/authStore'
 import LikeButton from '../../components/LikeButton'
 import Comments from '../../components/Comments'
 
-type DetailProps = {
+interface DetailProps {
   postDetails: Video
 }
 

@@ -7,7 +7,7 @@ import { GoVerified } from 'react-icons/go'
 
 import { Video } from '../types'
 
-type VideoCardProps = {
+interface VideoCardProps {
   post: Video
 }
 

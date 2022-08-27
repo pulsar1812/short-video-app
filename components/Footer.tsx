@@ -2,7 +2,7 @@ import React from 'react'
 
 import { footerList1, footerList2, footerList3 } from '../utils/constants'
 
-type ListProps = {
+interface ListProps {
   items: string[]
   mt: boolean
 }

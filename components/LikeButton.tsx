@@ -3,7 +3,7 @@ import { MdFavorite } from 'react-icons/md'
 
 import useAuthStore from '../store/authStore'
 
-type LikeButtonProps = {
+interface LikeButtonProps {
   likes: any[]
   handleLike: () => void
   handleDislike: () => void

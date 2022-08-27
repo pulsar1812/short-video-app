@@ -7,7 +7,7 @@ import useAuthStore from '../store/authStore'
 import NoResults from './NoResults'
 import { IUser } from '../types'
 
-type CommentsProps = {
+interface CommentsProps {
   isPostingComment: boolean
   comment: string
   setComment: Dispatch<SetStateAction<string>>

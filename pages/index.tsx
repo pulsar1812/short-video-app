@@ -5,7 +5,7 @@ import VideoCard from '../components/VideoCard'
 import NoResults from '../components/NoResults'
 import { BASE_URL } from '../utils'
 
-type VideoProps = {
+interface VideoProps {
   videos: Video[]
 }
 
